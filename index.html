@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kaushal Kishor - Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+  </head>
+  <body>
+    <!-- Fixed Navigation Bar -->
+    <nav class="navbar" id="mainNavbar">
+      <div class="nav-container">
+        <a href="#home" class="nav-logo">
+          <i class="fas fa-code"></i> Kaushal
+        </a>
+
+        <div class="nav-right">
+          <!-- Theme Toggle -->
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle theme"
+          >
+            <i class="fas fa-sun sun-icon"></i>
+            <i class="fas fa-moon moon-icon"></i>
+            <span class="theme-toggle-slider"></span>
+          </button>
+
+          <!-- Resume Download -->
+          <a
+            href="resume/Kaushal_Resume.pdf"
+            class="resume-download-btn"
+            download="Kaushal_Kishor_Resume.pdf"
+          >
+            <i class="fas fa-download"></i> Resume
+          </a>
+
+          <!-- Mobile Menu Toggle -->
+          <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+            <span class="hamburger"></span>
+          </button>
+        </div>
+
+        <ul class="nav-menu" id="navMenu">
+          <li class="nav-item">
+            <a href="#home" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#skills" class="nav-link">Skills</a>
+          </li>
+          <li class="nav-item">
+            <a href="#projects" class="nav-link">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 class="hero-title">
+              Hi, I'm <span class="highlight">Kaushal Kishor</span>
+            </h1>
+            <h2 class="hero-subtitle">
+              I am a <span class="typewriter" id="typewriter"></span>
+            </h2>
+            <p class="hero-description">
+              Full Stack Developer & MCA Student at Galgotias University
+            </p>
+            <div class="hero-buttons">
+              <a href="#projects" class="btn btn-primary">
+                <i class="fas fa-briefcase"></i> View Projects
+              </a>
+              <a href="#contact" class="btn btn-secondary">
+                <i class="fas fa-envelope"></i> Hire Me
+              </a>
+              <a
+                href="resume/Kaushal_Resume.pdf"
+                class="btn btn-resume"
+                download="Kaushal_Resume.pdf"
+              >
+                <i class="fas fa-download"></i> Download Resume
+              </a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              src="images/kk.jpg"
+              alt="Kaushal Kishor"
+              class="profile-img"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+            <div class="profile-placeholder">
+              <i class="fas fa-user-circle"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Hello! I'm <strong>Kaushal Kishor</strong>, welcome to my
+              portfolio!
+            </p>
+            <p>
+              I'm passionate about web development with expertise in both
+              front-end and back-end technologies. I enjoy creating responsive,
+              user-friendly web applications that solve real-world problems.
+            </p>
+            <p>
+              Currently pursuing Master's in Computer Application (MCA) from
+              Galgotias University, I'm constantly learning and adapting to new
+              technologies in the fast-evolving field of software development.
+            </p>
+            <p>
+              My goal is to build efficient, scalable applications that provide
+              excellent user experiences while maintaining clean, maintainable
+              code.
+            </p>
+          </div>
+          <div class="about-stats">
+            <div class="stat-item">
+              <h3>50+</h3>
+              <p>Projects Completed</p>
+            </div>
+            <div class="stat-item">
+              <h3>2+</h3>
+              <p>Years Experience</p>
+            </div>
+            <div class="stat-item">
+              <h3>100%</h3>
+              <p>Client Satisfaction</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-section">
+      <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+          <div class="skill-category">
+            <h3><i class="fab fa-html5"></i> Frontend</h3>
+            <div class="skill-items">
+              <div class="skill-item">
+                <span>HTML5</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 95%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>CSS3</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>JavaScript</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>React</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3><i class="fas fa-server"></i> Backend</h3>
+            <div class="skill-items">
+              <div class="skill-item">
+                <span>Node.js</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 85%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>Express.js</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>Python</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 75%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>MongoDB</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3><i class="fas fa-tools"></i> Tools & Others</h3>
+            <div class="skill-items">
+              <div class="skill-item">
+                <span>Git & GitHub</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>VS Code</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 95%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>Responsive Design</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <span>REST APIs</span>
+                <div class="skill-bar">
+                  <div class="skill-level" style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+      <div class="container">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <div class="project-content">
+              <h3>Portfolio Website</h3>
+              <p>
+                Responsive portfolio with dark/light mode, smooth animations,
+                and contact form.
+              </p>
+              <div class="project-tech">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"
+                  ><i class="fab fa-github"></i> Code</a
+                >
+                <a href="#" class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Live</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="project-content">
+              <h3>E-Commerce Platform</h3>
+              <p>
+                Full-stack e-commerce with user auth, cart, and payment
+                integration.
+              </p>
+              <div class="project-tech">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>MongoDB</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"
+                  ><i class="fab fa-github"></i> Code</a
+                >
+                <a href="#" class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Live</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <i class="fas fa-tasks"></i>
+            </div>
+            <div class="project-content">
+              <h3>Task Manager</h3>
+              <p>
+                Productivity app with drag-drop tasks, categories, and progress
+                tracking.
+              </p>
+              <div class="project-tech">
+                <span>JavaScript</span>
+                <span>Firebase</span>
+                <span>CSS</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link"
+                  ><i class="fab fa-github"></i> Code</a
+                >
+                <a href="#" class="project-link"
+                  ><i class="fas fa-external-link-alt"></i> Live</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Contact Information</h3>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <h4>Email</h4>
+                <p>kkup.06009@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <h4>Location</h4>
+                <p>Galgotias University, Greater Noida</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-graduation-cap"></i>
+              <div>
+                <h4>Education</h4>
+                <p>MCA Student</p>
+              </div>
+            </div>
+
+            <div class="social-links">
+              <h4>Follow Me</h4>
+              <div class="social-icons">
+                <a href="#" class="social-icon"
+                  ><i class="fab fa-github"></i
+                ></a>
+                <a href="#" class="social-icon"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a href="#" class="social-icon"
+                  ><i class="fab fa-twitter"></i
+                ></a>
+                <a href="#" class="social-icon"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Send Message</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="senderEmail">Your Email *</label>
+                <input
+                  type="email"
+                  id="senderEmail"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="service">Service Needed</label>
+                <select id="service">
+                  <option value="Web Development">Web Development</option>
+                  <option value="Web Design">Web Design</option>
+                  <option value="Full Stack Project">Full Stack Project</option>
+                  <option value="Consultation">Consultation</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="message">Your Message *</label>
+                <textarea
+                  id="message"
+                  rows="5"
+                  placeholder="Enter your message"
+                  required
+                ></textarea>
+              </div>
+              <button type="button" id="sendBtn" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i> Send via Gmail
+              </button>
+              <p class="form-note">* Opens Gmail with pre-filled message</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo"><i class="fas fa-code"></i> Kaushal</div>
+          <p class="footer-text">
+            Building digital experiences with clean code and creativity
+          </p>
+          <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <p class="copyright">
+            Created By Kaushal Kishor © 2025. All Rights Reserved
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="script.js"></script>
+    <script src="hire.js"></script>
+  </body>
+</html>
