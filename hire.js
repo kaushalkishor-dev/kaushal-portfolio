@@ -1,292 +1,135 @@
-// ============================================
-// HIRE.JS - Contact Form & Email Functionality
-// ============================================
-
+// ===== HIRE.JS - Contact Form (Returns to Portfolio + Clears Form) =====
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("📧 Hire.js initializing...");
-  initContactForm();
-  console.log("✅ Hire.js initialized");
+    console.log("📧 Contact form initializing...");
+    initContactForm();
 });
 
-// ===== CONTACT FORM =====
 function initContactForm() {
-  const sendBtn = document.getElementById("sendBtn");
-  const contactForm = document.getElementById("contactForm");
-
-  if (!sendBtn || !contactForm) {
-    console.error("Contact form elements not found");
-    return;
-  }
-
-  // Email validation function
-  function isValidEmail(email) {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  }
-
-  // Form validation
-  function validateForm() {
-    const emailInput = document.getElementById("senderEmail");
-    const messageInput = document.getElementById("message");
-
-    if (!emailInput || !messageInput) {
-      alert("Form error. Please refresh the page.");
-      return false;
+    const sendBtn = document.getElementById("sendBtn");
+    const contactForm = document.getElementById("contactForm");
+    
+    if (!sendBtn || !contactForm) {
+        console.error("Contact form elements missing");
+        return;
     }
 
-    const email = emailInput.value.trim();
-    const message = messageInput.value.trim();
-
-    // Validate email
-    if (!email) {
-      alert("Please enter your email address");
-      emailInput.focus();
-      return false;
+    // Email validation
+    function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 
-    if (!isValidEmail(email)) {
-      alert("Please enter a valid email address (e.g., name@example.com)");
-      emailInput.focus();
-      return false;
+    // Form validation
+    function validateForm() {
+        const email = document.getElementById("senderEmail").value.trim();
+        const message = document.getElementById("message").value.trim();
+        
+        if (!email) {
+            alert("Please enter your email address");
+            document.getElementById("senderEmail").focus();
+            return false;
+        }
+        if (!isValidEmail(email)) {
+            alert("Please enter a valid email address (e.g., name@example.com)");
+            document.getElementById("senderEmail").focus();
+            return false;
+        }
+        if (!message) {
+            alert("Please enter your message");
+            document.getElementById("message").focus();
+            return false;
+        }
+        if (message.length < 10) {
+            alert("Message should be at least 10 characters long");
+            document.getElementById("message").focus();
+            return false;
+        }
+        return true;
     }
 
-    // Validate message
-    if (!message) {
-      alert("Please enter your message");
-      messageInput.focus();
-      return false;
+    // Clear form function
+    function clearForm() {
+        document.getElementById("senderEmail").value = "";
+        document.getElementById("service").selectedIndex = 0;
+        document.getElementById("message").value = "";
     }
 
-    if (message.length < 10) {
-      alert("Message should be at least 10 characters long");
-      messageInput.focus();
-      return false;
+    // Main send function - opens email in NEW TAB, clears form, stays on portfolio
+    function sendMessage() {
+        if (!validateForm()) return;
+
+        // Get form values
+        const email = document.getElementById("senderEmail").value.trim();
+        const service = document.getElementById("service").value;
+        const message = document.getElementById("message").value.trim();
+        const yourEmail = "kkup.06009@gmail.com";
+        
+        const subject = `Portfolio Inquiry: ${service}`;
+        const body = `From: ${email}\n\nService: ${service}\n\nMessage:\n${message}\n\n---\nSent from Kaushal's Portfolio`;
+
+        // Create email links
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(yourEmail)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const mailtoLink = `mailto:${yourEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        // Clear form FIRST (so user sees it's empty)
+        clearForm();
+
+        // Try to open email in NEW TAB (portfolio stays open)
+        let emailOpened = false;
+        
+        // Method 1: Gmail in new tab (works on click - usually allowed)
+        try {
+            const newTab = window.open(gmailUrl, '_blank');
+            if (newTab && !newTab.closed) {
+                emailOpened = true;
+                alert("✅ Gmail opened in new tab!\n\nPlease complete and send your email there.\n\nYour portfolio page is still open.");
+            } else {
+                throw new Error("Popup blocked");
+            }
+        } catch (e) {
+            console.log("Gmail new tab failed, trying mailto");
+        }
+
+        // Method 2: mailto: in new tab (fallback)
+        if (!emailOpened) {
+            try {
+                const newTab = window.open(mailtoLink, '_blank');
+                if (newTab && !newTab.closed) {
+                    emailOpened = true;
+                    alert("✅ Email client opened in new tab/window!\n\nPlease send your email there.\n\nYour portfolio page is still open.");
+                } else {
+                    throw new Error("Popup blocked");
+                }
+            } catch (e) {
+                // Final fallback: open in same tab (but portfolio will be replaced)
+                window.location.href = mailtoLink;
+                alert("📧 Opening email client...\n\nAfter sending, please return to portfolio tab.");
+            }
+        }
+
+        // If popup was blocked, show manual instruction
+        if (!emailOpened) {
+            alert("❌ Popup blocked!\n\nPlease allow popups for this site or copy the link below:\n\n" + gmailUrl);
+        }
+
+        // Optional: Track submission
+        let count = parseInt(localStorage.getItem('contactSubmissions')) || 0;
+        localStorage.setItem('contactSubmissions', count + 1);
+        console.log(`Contact submission #${count + 1}`);
     }
 
-    return true;
-  }
-
-  // Send via Gmail function
-  function sendViaGmail() {
-    if (!validateForm()) {
-      return;
-    }
-
-    // Get form values
-    const visitorEmail = document.getElementById("senderEmail").value.trim();
-    const service =
-      document.getElementById("service").value || "General Inquiry";
-    const message = document.getElementById("message").value.trim();
-
-    // Your email address
-    const yourEmail = "kkup.06009@gmail.com";
-
-    // Create email subject and body
-    const subject = `Portfolio Inquiry: ${service}`;
-    const body = `
-From: ${visitorEmail}
-Service: ${service}
-
-Message:
-${message}
-
----
-Sent via Kaushal's Portfolio Contact Form
-`;
-
-    // Create Gmail compose URL
-    const gmailUrl =
-      `https://mail.google.com/mail/?view=cm&fs=1` +
-      `&to=${encodeURIComponent(yourEmail)}` +
-      `&su=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    console.log("Opening Gmail compose window...");
-
-    // Open Gmail in new tab
-    const gmailWindow = window.open(
-      gmailUrl,
-      "_blank",
-      "noopener,noreferrer,width=800,height=600"
-    );
-
-    // Check if window opened successfully
-    if (gmailWindow && !gmailWindow.closed) {
-      // Success - Gmail opened
-      showSuccessMessage("gmail");
-
-      // Clear form after delay
-      setTimeout(() => {
-        contactForm.reset();
-      }, 1000);
-    } else {
-      // Popup blocked - show alternative
-      showPopupBlockedMessage(gmailUrl);
-    }
-  }
-
-  // Show success message
-  function showSuccessMessage(type) {
-    const messages = {
-      gmail: `
-✅ Gmail opened in new tab!
-
-Next steps:
-1. Check for new browser tab (Gmail)
-2. Email is pre-filled with your message
-3. Click "Send" in Gmail to complete
-
-💡 If you don't see Gmail:
-• Check browser popup blocker
-• Look behind other windows
-• Try clicking the button again
-`,
-    };
-
-    alert(messages[type] || "✅ Message ready to send!");
-  }
-
-  // Show popup blocked message
-  function showPopupBlockedMessage(gmailUrl) {
-    const message = `
-❌ Popup blocked!
-
-Please:
-1. Allow popups for this site
-2. Or click the link below:
-
-${gmailUrl}
-
-3. Or email directly to: kkup.06009@gmail.com
-`;
-
-    alert(message);
-
-    // Optionally create a clickable link
-    createManualLink(gmailUrl);
-  }
-
-  // Create manual link for popup blocked case
-  function createManualLink(gmailUrl) {
-    const linkDiv = document.createElement("div");
-    linkDiv.id = "gmailManualLink";
-    linkDiv.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            z-index: 10000;
-            border-left: 5px solid #007bff;
-            max-width: 300px;
-        `;
-
-    linkDiv.innerHTML = `
-            <h4 style="margin: 0 0 10px 0; color: #333;">📧 Open Gmail</h4>
-            <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;">
-                Click below to open Gmail compose window:
-            </p>
-            <a href="${gmailUrl}" target="_blank" style="
-                display: block;
-                background: #4285f4;
-                color: white;
-                padding: 10px;
-                border-radius: 5px;
-                text-decoration: none;
-                text-align: center;
-                font-weight: bold;
-                margin-bottom: 10px;
-            ">
-                <i class="fas fa-external-link-alt"></i> Open Gmail
-            </a>
-            <button onclick="document.getElementById('gmailManualLink').remove()" style="
-                background: #ccc;
-                border: none;
-                padding: 5px 10px;
-                border-radius: 3px;
-                cursor: pointer;
-                width: 100%;
-            ">
-                Close
-            </button>
-        `;
-
-    document.body.appendChild(linkDiv);
-
-    // Auto remove after 30 seconds
-    setTimeout(() => {
-      if (document.getElementById("gmailManualLink")) {
-        document.getElementById("gmailManualLink").remove();
-      }
-    }, 30000);
-  }
-
-  // Event listener for send button
-  sendBtn.addEventListener("click", sendViaGmail);
-
-  // Handle Enter key in form (but not in textarea)
-  contactForm.addEventListener("keypress", function (e) {
-    if (e.key === "Enter" && !e.shiftKey && e.target.tagName !== "TEXTAREA") {
-      e.preventDefault();
-      sendViaGmail();
-    }
-  });
-
-  // Form submission prevention
-  contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    sendViaGmail();
-  });
-
-  console.log("✅ Contact form ready - using Gmail compose");
+    // Event listener
+    sendBtn.addEventListener("click", sendMessage);
+    
+    // Prevent form from submitting (no page reload)
+    contactForm.addEventListener("submit", (e) => e.preventDefault());
+    
+    // Handle Enter key (but not in textarea)
+    contactForm.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" && e.target.tagName !== "TEXTAREA") {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+    
+    console.log("✅ Contact form ready - email opens in new tab, form clears automatically");
 }
-
-// ===== FALLBACK MAILTO FUNCTION =====
-function sendViaMailto() {
-  // This is a fallback function if needed
-  const email = document.getElementById("senderEmail").value.trim();
-  const service = document.getElementById("service").value;
-  const message = document.getElementById("message").value.trim();
-
-  if (!email || !message) {
-    alert("Please fill all required fields");
-    return;
-  }
-
-  const subject = `Portfolio Inquiry: ${service}`;
-  const body = `From: ${email}\n\nService: ${service}\n\nMessage:\n${message}`;
-
-  const mailtoLink =
-    `mailto:kkup.06009@gmail.com` +
-    `?subject=${encodeURIComponent(subject)}` +
-    `&body=${encodeURIComponent(body)}`;
-
-  window.location.href = mailtoLink;
-
-  alert("Opening email client... Please click 'Send' to complete.");
-}
-
-// ===== UTILITY FUNCTIONS =====
-function trackContactSubmission(type) {
-  // Track contact form submissions
-  let submissions = JSON.parse(
-    localStorage.getItem("contactSubmissions") || "[]"
-  );
-  submissions.push({
-    type: type,
-    timestamp: new Date().toISOString(),
-    userAgent: navigator.userAgent,
-  });
-  localStorage.setItem("contactSubmissions", JSON.stringify(submissions));
-
-  console.log(`Contact submission tracked: ${type}`);
-}
-
-// Export for debugging
-window.contactForm = {
-  sendViaGmail: sendViaGmail,
-  sendViaMailto: sendViaMailto,
-  trackContactSubmission: trackContactSubmission,
-};
